@@ -1,9 +1,14 @@
 <template>
   <div>
-    <rotate-square2 v-if="isLoading"></rotate-square2>
-
-
+  
     <div class="overflow-auto">
+
+	
+      <b-spinner v-if="isLoading"  class="overflow-auto"
+        style="width: 3rem; height: 3rem; text-align:center; position:relative; margin:auto"
+        label="Large Spinner"
+      />
+
       Rapor Id : {{ $route.params.raporId }} Group Id :
       {{ $route.params.groupId }}
 
@@ -26,6 +31,7 @@ import AxiosPlugin from "vue-axios-cors";
 import axios from "axios";
 import VueSpinners from 'vue-spinners'
 import { SquareSpinner } from 'vue-spinners'
+import { BSpinner } from 'bootstrap-vue'
 
 Vue.component('square', SquareSpinner)
 
@@ -33,7 +39,8 @@ Vue.use(VueSpinners)
 Vue.use(AxiosPlugin);
 export default {
   components: {
-	  RotateSquare2
+	  RotateSquare2,
+	  BSpinner
   },
   data() {
     return {

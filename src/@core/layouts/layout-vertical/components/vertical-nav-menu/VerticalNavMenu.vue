@@ -70,7 +70,7 @@
         }
       "
     >
-      <vertical-nav-menu-items
+      <vertical-nav-menu-items v-if="isMenuShow"
         :items="menu"
         class="navigation navigation-main"
       />
@@ -120,101 +120,153 @@ export default {
   data() {
     return {
       url: "https://localhost:5001/api/Kullanici",
-      items: [],
-      accessTokenText: "",
-      menu: [
-        {
-          title: "Müşteri İlişkileri",
-          icon: "HomeIcon",
-          tag: "",
-          children: [
-            {
-              title: "Basf Antrepo Stok",
-              //    route:{path: '/rapor-detay/aaa/444'}
-              //route:{path: 'rapor-detay', query: { raporId: 'test',groupId:'444' }}
-              route: {
-                name: "rapor-detay",
-                params: { raporId: "6095e40b-adf1-4388-aac4-f6ee44264b46", groupId: "7cea83ff-f49b-4666-af5c-7063386d40da" },
-              },
-            },
-            {
-              title: "Basf Depo Stok",
-              // route:{path: 'rapor-detay', query: { raporId: 'public',groupId:'111' }}
+	  menu : undefined,
+	  isMenuShow : false,
+	  defaultMenu : [{
+			title: "Yükleniyor",
+			icon: "....",
+			tag: "",
+			children: [
+			{
+				title: "---",
+				//    route:{path: '/rapor-detay/aaa/444'}
+				//route:{path: 'rapor-detay', query: { raporId: 'test',groupId:'444' }}
+				route: {
+				name: "---",
+				params: { "raporId": "6095e40b-adf1-4388-aac4-f6ee44264b46", "groupId": "7cea83ff-f49b-4666-af5c-7063386d40da" },
+				}
+			}]
+		},]
+    //   menu: [
+    //     {
+    //       title: "Müşteri İlişkileri",
+    //       icon: "HomeIcon",
+    //       tag: "",
+    //       children: [
+    //         {
+    //           title: "Basf Antrepo Stok",
+    //           //    route:{path: '/rapor-detay/aaa/444'}
+    //           //route:{path: 'rapor-detay', query: { raporId: 'test',groupId:'444' }}
+    //           route: {
+    //             name: "rapor-detay",
+    //             params: { "raporId": "6095e40b-adf1-4388-aac4-f6ee44264b46", "groupId": "7cea83ff-f49b-4666-af5c-7063386d40da" },
+    //           },
+    //         },
+    //         {
+    //           title: "Basf Depo Stok",
+    //           // route:{path: 'rapor-detay', query: { raporId: 'public',groupId:'111' }}
 
-              // route:{path: 'rapor-detay/:raporId/:groupId', params: { raporId: 'private',groupId:'11' }}
-              // route:{path: '/rapor-detay/bbb/111'}
-              route: {
-                name: "rapor-detay",
-                params: { raporId: "a9637411-880d-4545-8c7c-1de1b5cbfe3a", groupId: "7cea83ff-f49b-4666-af5c-7063386d40da" },
-              },
-            },
-          ],
-        },
-		{
-          title: "Alos Raporları",
-          icon: "HomeIcon",
-          tag: "",
-          children: [
-            {
-              title: "Kiralık Araç Mütabakat Liste",
-              //    route:{path: '/rapor-detay/aaa/444'}
-              //route:{path: 'rapor-detay', query: { raporId: 'test',groupId:'444' }}
-              route: {
-                name: "rapor-detay",
-                params: { raporId: "90ff8231-dbcb-4a93-a30f-1a292836827e", groupId: "f85a3f61-8062-4096-80b1-b397aa513147" },
-              },
-            },
-            {
-              title: "Faturası Kesilmemiş Alışlar",
-              // route:{path: 'rapor-detay', query: { raporId: 'public',groupId:'111' }}
+    //           // route:{path: 'rapor-detay/:raporId/:groupId', params: { raporId: 'private',groupId:'11' }}
+    //           // route:{path: '/rapor-detay/bbb/111'}
+    //           route: {
+    //             name: "rapor-detay",
+    //             params: { "raporId": "a9637411-880d-4545-8c7c-1de1b5cbfe3a", "groupId": "7cea83ff-f49b-4666-af5c-7063386d40da" },
+    //           },
+    //         },
+    //       ],
+    //     },
+	// 	{
+    //       title: "Alos Raporları",
+    //       icon: "HomeIcon",
+    //       tag: "",
+    //       children: [
+    //         {
+    //           title: "Kiralık Araç Mütabakat Liste",
+    //           //    route:{path: '/rapor-detay/aaa/444'}
+    //           //route:{path: 'rapor-detay', query: { raporId: 'test',groupId:'444' }}
+    //           route: {
+    //             name: "rapor-detay",
+    //             params: { "raporId": "90ff8231-dbcb-4a93-a30f-1a292836827e", "groupId": "f85a3f61-8062-4096-80b1-b397aa513147" },
+    //           },
+    //         },
+    //         {
+    //           title: "Faturası Kesilmemiş Alışlar",
+    //           // route:{path: 'rapor-detay', query: { raporId: 'public',groupId:'111' }}
 
-              // route:{path: 'rapor-detay/:raporId/:groupId', params: { raporId: 'private',groupId:'11' }}
-              // route:{path: '/rapor-detay/bbb/111'}
-              route: {
-                name: "rapor-detay",
-                params: { raporId: "781cb49c-8097-459e-aca3-2cd67f1433d6", groupId: "f85a3f61-8062-4096-80b1-b397aa513147" },
-              },
-            },
-          ],
-        },
-      ],
+    //           // route:{path: 'rapor-detay/:raporId/:groupId', params: { raporId: 'private',groupId:'11' }}
+    //           // route:{path: '/rapor-detay/bbb/111'}
+    //           route: {
+    //             name: "rapor-detay",
+    //             params: { "raporId": "781cb49c-8097-459e-aca3-2cd67f1433d6", "groupId": "f85a3f61-8062-4096-80b1-b397aa513147" },
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
     };
   },
+  created:function(){
+	 console.log("Menu : ", this.$store.state.leftMenu);
+	 this.$nextTick(() => {
+		console.log("Dom yenilendi");
+  	})
+  },
+  watch:{
+	  isMenuShow:function(){
+		  return this.$store.state.isMenuShow;
+	  }
+  },
 
-  created: function () {},
-  mounted() {
-   /* let self = this;
-    this.$nextTick(() => {
-      let req = {
-        kullaniciAdi: "Adem.KALEM@alisangroup.com",
-        sifre: "123456",
-        token: "string",
-        isIcMusteri: false,
-      };
-      let url = "https://localhost:5001/api/Kullanici";
-
-      axios
-        .post(url, req, { headers: { "content-type": "application/json" } })
-        .then((res) => {
-          console.log("Login success.");
-          self.accessTokenText = res.data.powerBIToken;
-          var uzunluk = res.data.groupListesi.length;
-          for (var item = 0; item < uzunluk; item++) {
-            self.items = res.data.groupListesi[item].groupAdi;
-            console.log(self.items);
-          }
-        })
-        .catch((err) => {
-          console.error("Login failed.", err);
-          debugger;
-        });
-    });*/
+  mounted: function () {
+	  let self = this;
+	  console.log(self.menu);
+	  debugger
+	  this.$nextTick(() => {
+		self.ServisAlma();
+	  })
+  },
+methods:{
+	ServisAlma() {
+		debugger;
+		let self = this;
+		this.$nextTick(() => {
+		  console.log(this.$route.name);
+		  let req = {
+			kullaniciAdi: "Adem.KALEM@alisangroup.com",
+			sifre: "123456",
+			token: "string",
+			isIcMusteri: false,
+		  };
+		  let url = "https://localhost:5001/api/Kullanici";
+  
+		  axios
+			.post(url, req, { headers: { "content-type": "application/json" } })
+			.then((res) => {
+			  debugger;
+			  console.log(res);
+			  //  alert(res.access_token);
+			  // alert(res.data[0].OnaycıKodu);
+			  console.log("Login success.");
+			  debugger
+			  self.$store.state.accessToken = res.data.powerBIToken;
+			  self.menu = res.data.leftMenu;
+			  self.isMenuShow = true;
+			  console.log(self.accessTokenText);
+			  debugger;
+			  var raporId = this.$route.params.raporId;
+			  console.log(raporId);
+  
+			  var groupId = this.$route.params.groupId;
+			  console.log(groupId);
+			 
+  
+		  
+			 
+			})
+			.catch((err) => {
+			  console.error("Login failed.", err);
+  
+			  debugger;
+			});
+		});
+	  },
   },
   computed: {
     rows() {
       return this.items.length;
     },
   },
+
   props: {
     isVerticalMenuActive: {
       type: Boolean,

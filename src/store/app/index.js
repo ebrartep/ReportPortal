@@ -5,7 +5,8 @@ export default {
   state: {
     windowWidth: 0,
     shallShowOverlay: false,
-	employeeCode: null
+	employeeCode: null,
+	accessToken : null,
   },
   getters: {
     currentBreakPoint: state => {

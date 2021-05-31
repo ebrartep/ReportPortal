@@ -1,10 +1,7 @@
 <template>
   <div class="overflow-auto">
     <!-- submit buttons -->
-    <b-button type="submit" variant="primary" block @click="PowerBIReport">
-      Rapor Getir
-    </b-button>
-    <div id="reportContainer2" style="width: 100%; height: 800px"></div>
+    
   </div>
 </template>
 
@@ -62,7 +59,7 @@ export default {
   computed: {},
 
   methods: {
-    PowerBIReport() {
+   /* PowerBIReport() {
       let self = this;
 
       var txtEmbedUrl2 =
@@ -109,7 +106,7 @@ export default {
       report.on("error", function () {
         // this.report.off("error");
       });
-    },
+    },*/
   },
 };
 </script>
