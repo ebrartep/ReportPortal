@@ -26,7 +26,7 @@ Vue.use(VueCompositionAPI)
 // import core styles
 require('@core/scss/core.scss')
 require('@core/scss/vue/libs/vue-good-table.scss')
-
+//
 // import assets styles
 require('@/assets/scss/style.scss')
 
